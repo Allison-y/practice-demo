@@ -2,6 +2,11 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 // import HomeView from '../views/HomeView.vue'
 import constRoutes from './constRoutes'
 
+// 根据模块自动化导入路由
+const moduleFiles = require.context('./modules', true, /.ts$/)
+
+const moduleRoutes = moduleFiles.keys().map(key => moduleFiles(key).default).sort((a, b) => a.sort - b.sort)
+
 // RouteRecordRaw vue-router内置类型
 export type PdRouteRecordRaw = RouteRecordRaw & {
   name: string | symbol
@@ -28,7 +33,7 @@ export type PdRouteRecordRaw = RouteRecordRaw & {
 // createRouter 创建一个可以被Vue应用程序使用的路由实例  配置RouterOptions
 const router = createRouter({
   history: createWebHistory(),
-  routes: constRoutes,
+  routes: constRoutes.concat(moduleRoutes),
   scrollBehavior: (to, from, savedPosition) => {
     if (savedPosition) return savedPosition
 
@@ -39,5 +44,5 @@ const router = createRouter({
     return false
   }
 })
-
+console.log({ router })
 export default router
