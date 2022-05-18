@@ -5,7 +5,7 @@ import constRoutes from './constRoutes'
 // 根据模块自动化导入路由
 const moduleFiles = require.context('./modules', true, /.ts$/)
 
-const moduleRoutes = moduleFiles.keys().map(key => moduleFiles(key).default).sort((a, b) => a.sort - b.sort)
+export const moduleRoutes = moduleFiles.keys().map(key => moduleFiles(key).default).sort((a, b) => a.sort - b.sort)
 
 // RouteRecordRaw vue-router内置类型
 export type PdRouteRecordRaw = RouteRecordRaw & {

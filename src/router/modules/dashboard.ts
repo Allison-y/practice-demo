@@ -1,16 +1,19 @@
-import { PdRouteRecordRaw } from "..";
-import { DASHBOARD, HOME } from "../config";
+import { PdRouteRecordRaw } from '..';
+import * as routeConfig from '../config';
+import Layout from '@/layout/index.vue';
 
 const dashboardRoute: PdRouteRecordRaw = {
-  ...HOME,
-  redirect: DASHBOARD.path,
-  meta: { title:'首页', sort:1, unfold:true },
-  // component: Layout
+  ...routeConfig.HOME,
+  redirect: routeConfig.DASHBOARD.path,
+  meta: { title: '首页', sort: 1, unfold: true },
+  component: Layout,
   children: [
     {
-      ...DASHBOARD,
-      component: () => import('views/dashboard/index.vue'),
-      meta:{ title:'首页', icon:'' }
+      ...routeConfig.DASHBOARD,
+      component: () => import('@/views/dashboard/index.vue'),
+      meta: { title: '首页', icon: '' }
     }
-  ]  
-}
+  ]
+};
+
+export default dashboardRoute;
