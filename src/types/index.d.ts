@@ -18,9 +18,9 @@ declare interface RouteConfig {
 
 declare interface NameWithId {
   name: string;
-  id: string | number
+  id: string | number;
 }
 
 declare interface MultiNameWidthId extends NameWithId {
-  [x:string]: any
+  [x: string]: any;
 }

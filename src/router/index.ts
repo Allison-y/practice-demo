@@ -1,18 +1,21 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 // import HomeView from '../views/HomeView.vue'
-import constRoutes from './constRoutes'
+import constRoutes from './constRoutes';
 
 // 根据模块自动化导入路由
-const moduleFiles = require.context('./modules', true, /.ts$/)
+const moduleFiles = require.context('./modules', true, /.ts$/);
 
-export const moduleRoutes = moduleFiles.keys().map(key => moduleFiles(key).default).sort((a, b) => a.sort - b.sort)
+export const moduleRoutes = moduleFiles
+  .keys()
+  .map(key => moduleFiles(key).default)
+  .sort((a, b) => a.sort - b.sort);
 
 // RouteRecordRaw vue-router内置类型
 export type PdRouteRecordRaw = RouteRecordRaw & {
-  name: string | symbol
-  meta?: PdRouteMate
-  children?: PdRouteRecordRaw[]
-}
+  name: string | symbol;
+  meta?: PdRouteMate;
+  children?: PdRouteRecordRaw[];
+};
 
 // const routes: Array<RouteRecordRaw> = [
 //   {
@@ -35,14 +38,14 @@ const router = createRouter({
   history: createWebHistory(),
   routes: constRoutes.concat(moduleRoutes),
   scrollBehavior: (to, from, savedPosition) => {
-    if (savedPosition) return savedPosition
+    if (savedPosition) return savedPosition;
 
     if (to.matched.every((record, i) => from.matched[i] !== record)) {
-      return { left: 0, top: 0 }
+      return { left: 0, top: 0 };
     }
 
-    return false
+    return false;
   }
-})
-console.log({ router })
-export default router
+});
+console.log({ router });
+export default router;

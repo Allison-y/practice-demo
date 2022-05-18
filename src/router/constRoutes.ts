@@ -1,5 +1,5 @@
-import { PdRouteRecordRaw } from '.'
-import { LOGIN } from './config'
+import { PdRouteRecordRaw } from '.';
+import { LOGIN } from './config';
 
 const constRoutes: PdRouteRecordRaw[] = [
   {
@@ -17,7 +17,6 @@ const constRoutes: PdRouteRecordRaw[] = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   }
+];
 
-]
-
-export default constRoutes
+export default constRoutes;
